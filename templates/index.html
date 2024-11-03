@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Book Manager</title>
+</head>
+<body>
+    <h1>Library Book Manager</h1>
+
+
+    <a href="/add_user">Add New User</a> |
+    <a href="/loan_book">Loan a Book</a>
+    <br><br>
+
+    <h1>Library Book Manager</h1>
+ <img src="/static/images/books.jpg" alt="Books" style="width: 100%; max-width: 300px; margin-bottom: 20px;">
+    <!-- Formulari për të shtuar një libër të ri -->
+    <form action="/add" method="POST">
+        <input type="text" name="title" placeholder="Book Title" required>
+        <input type="text" name="author" placeholder="Author" required>
+        <button type="submit">Add Book</button>
+    </form>
+<form action="/search" method="GET" class="search-form">
+    <input type="text" name="query" placeholder="Search for a book">
+    <button type="submit">Search</button>
+</form>
+{% if message %}
+    <p style="color: red; font-weight: bold;">{{ message }}</p>
+{% endif %}
+
+    <!-- Lista e librave -->
+    <ul>
+        {% for book in books %}
+            <li>{{ book[1] }} by {{ book[2] }}
+                <a href="/delete/{{ book[0] }}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
